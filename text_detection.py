@@ -47,7 +47,7 @@ def img_process(image, filename, cropped_path, processed_path, cropped_csv_name,
     for i in range(boxes):
         if int(float(d['conf'][i])) > 60:
             (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
-            cropped_images.append(img[y:(y+h+1),x:(x+w+1)].copy())
+            cropped_images.append(image[y:(y+h+1),x:(x+w+1)].copy())
             img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
     
     cv2.imwrite(os.path.join(processed_path, filename), img)
