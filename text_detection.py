@@ -85,10 +85,10 @@ for index, file in enumerate(os.listdir(images_path)):
     cropped_grayscale_path = path_create(os.path.join(cropped_images_path, "grayscale"))
     cropped_grayscale_fpath = path_create(os.path.join(cropped_grayscale_path, filename.split('.')[0]))
     processed_grayscale_path = path_create(os.path.join(processed_images_path, "grayscale"))
-    img_process(img_grayscale, filename, cropped_grayscale_path, processed_grayscale_path, "grayscale_cropped.csv", "grayscale.csv", True, index==0)
+    img_process(img_grayscale, filename, cropped_grayscale_fpath, processed_grayscale_path, "grayscale_cropped.csv", "grayscale.csv", True, index==0)
 
     img_canny = canny(img_grayscale)
     cropped_canny_path = path_create(os.path.join(cropped_images_path, "canny"))
     cropped_canny_fpath = path_create(os.path.join(cropped_canny_path, filename.split('.')[0]))
     processed_canny_path = path_create(os.path.join(processed_images_path, "canny"))
-    img_process(img_canny, filename, cropped_canny_path, processed_canny_path, "canny_cropped.csv", "canny.csv", True, index==0)
+    img_process(img_canny, filename, cropped_canny_fpath, processed_canny_path, "canny_cropped.csv", "canny.csv", True, index==0)
