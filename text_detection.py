@@ -29,7 +29,7 @@ def img_list_save(img_list, path, filename):
     rows = []
     for index, val in enumerate(img_list):
         if val.size > 0:
-            cv2.imwrite(os.path.join(path, (str(index) + "_" + filename)), val)
+            cv2.imwrite(os.path.join(path, (str(index) + "." + filename.split('.')[1])), val)
             image_string = pytesseract.image_to_string(val)
             image_string = image_string.replace('\n', '')
             rows.append(f'{str(index) + "_" + filename},{image_string}\n')
@@ -77,15 +77,18 @@ for index, file in enumerate(os.listdir(images_path)):
     image = cv2.imread(image_path)
 
     cropped_normal_path = path_create(os.path.join(cropped_images_path, "normal"))
+    cropped_normal_fpath = path_create(os.path.join(cropped_normal_path, filename.split('.')[0]))
     processed_normal_path = path_create(os.path.join(processed_images_path, "normal"))
-    img_process(image, filename, cropped_normal_path, processed_normal_path,"normal_cropped.csv", "normal.csv", False, index==0)
+    img_process(image, filename, cropped_normal_fpath, processed_normal_path,"normal_cropped.csv", "normal.csv", False, index==0)
 
     img_grayscale = get_grayscale(image)
     cropped_grayscale_path = path_create(os.path.join(cropped_images_path, "grayscale"))
+    cropped_grayscale_fpath = path_create(os.path.join(cropped_grayscale_path, filename.split('.')[0]))
     processed_grayscale_path = path_create(os.path.join(processed_images_path, "grayscale"))
     img_process(img_grayscale, filename, cropped_grayscale_path, processed_grayscale_path, "grayscale_cropped.csv", "grayscale.csv", True, index==0)
 
     img_canny = canny(img_grayscale)
     cropped_canny_path = path_create(os.path.join(cropped_images_path, "canny"))
+    cropped_canny_fpath = path_create(os.path.join(cropped_canny_path, filename.split('.')[0]))
     processed_canny_path = path_create(os.path.join(processed_images_path, "canny"))
     img_process(img_canny, filename, cropped_canny_path, processed_canny_path, "canny_cropped.csv", "canny.csv", True, index==0)
